@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { findRole, type Project } from "@/data/profile";
 import { CloseIcon } from "./Icons";
+import ProjectArt from "./ProjectArt";
 
 const pad = (i: number) => String(i + 1).padStart(2, "0");
 
@@ -70,6 +71,10 @@ export default function ProjectDrawer({
             <span className="mono drawer__role">{role.role}</span>
           </div>
 
+          <div className="drawer__art">
+            <ProjectArt id={p.id} />
+          </div>
+
           <div className="drawer__metric">
             <div className="drawer__metric-num">
               <span className="mono">Key figure</span>
@@ -94,14 +99,33 @@ export default function ProjectDrawer({
 
           <div>
             <span className="mono drawer__label">What I built</span>
-            <ul className="highlights">
-              {p.highlights.map((h, i) => (
-                <li key={i}>
-                  <span className="mono highlights__n">{pad(i)}</span>
-                  <span>{h}</span>
-                </li>
-              ))}
-            </ul>
+            {p.highlightGroups ? (
+              p.highlightGroups.map((g, gi) => {
+                const offset = p.highlightGroups!.slice(0, gi).reduce((n, x) => n + x.items.length, 0);
+                return (
+                  <div key={g.title} className="highlights__group">
+                    <h4 className="serif highlights__title">{g.title}</h4>
+                    <ul className="highlights">
+                      {g.items.map((h, i) => (
+                        <li key={i}>
+                          <span className="mono highlights__n">{pad(offset + i)}</span>
+                          <span>{h}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })
+            ) : (
+              <ul className="highlights">
+                {p.highlights.map((h, i) => (
+                  <li key={i}>
+                    <span className="mono highlights__n">{pad(i)}</span>
+                    <span>{h}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
 
           <div>

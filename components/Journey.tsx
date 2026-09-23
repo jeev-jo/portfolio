@@ -89,18 +89,19 @@ export default function Journey() {
         <span className="mono eyebrow">(02) — The journey</span>
         <h2 className="serif section-title">The long way <em>to</em> AI.</h2>
         <p className="muted section-note">
-          Four chapters, physics to production agents. Open any project for its architecture and stack.
+          Newest first: the work I&apos;m doing now, then back to physics. Open any project for its architecture and stack.
         </p>
       </Reveal>
 
-      {education.map((e) => (
+      {/* Newest first: current role at the top, then rewind to where it started. */}
+      <WorkChapter id="work" n="04" role={rudhra} onOpen={open} current />
+      <WorkChapter n="03" role={qualitest} onOpen={open} />
+
+      {[...education].reverse().map((e) => (
         <div key={e.n} className="chapter">
           <ChapterHead n={e.n} eyebrow={e.eyebrow} meta={e.place} score={e.score} title={e.title} text={e.text} />
         </div>
       ))}
-
-      <WorkChapter id="work" n="03" role={qualitest} onOpen={open} />
-      <WorkChapter n="04" role={rudhra} onOpen={open} current />
 
       {selected && <ProjectDrawer project={selected} closing={closing} onClose={close} onNext={next} />}
     </section>

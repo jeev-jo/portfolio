@@ -21,6 +21,8 @@ export type Project = {
   summary: string;
   flow: string[];
   highlights: string[];
+  /** Optional: grouped "What I built" list; replaces `highlights` in the drawer when set. */
+  highlightGroups?: { title: string; items: string[] }[];
   tech: string[];
   tone: Tone;
   cols: number; // span in a 6-column bento
@@ -48,20 +50,6 @@ export const qualitest: Role = {
     "Azure ML pipelines, knowledge assistants, and the work that shaped how I think: stress-testing LLMs until they break.",
   projects: [
     {
-      id: "eval", code: "Q·03", kind: "LLM evaluation", title: "LLM Testing & Evaluation",
-      tone: "dark", cols: 2, rows: 2,
-      tagline: "Adversarial probing, jailbreak detection and model-graded evals: breaking chatbots on purpose, before users do.",
-      metricShort: "Red-team + model-graded", metric: "Evals",
-      metricLabel: "adversarial, jailbreak and model-graded quality checks",
-      summary: "A framework for breaking chatbots on purpose, before users do, and scoring response quality at scale.",
-      flow: ["Adversarial probes", "Jailbreak detection", "Model-graded evaluation", "Quality report"],
-      highlights: [
-        "Built adversarial probing and jailbreak-detection suites to stress-test chatbot safety.",
-        "Designed model-graded evaluations to check response quality.",
-      ],
-      tech: ["Adversarial Probing", "Jailbreak Detection", "Model-Graded Eval", "Python"],
-    },
-    {
       id: "agp", code: "Q·04", kind: "Agent platform", title: "Agentic AI Platform",
       tone: "light", cols: 4, rows: 1,
       tagline: "A plug-and-play agent framework with gRPC messaging and a public registry so teams could share and reuse agents.",
@@ -76,18 +64,18 @@ export const qualitest: Role = {
       tech: ["gRPC", "Agent Framework", "Agent Registry", "Python"],
     },
     {
-      id: "azml", code: "Q·01", kind: "ML pipelines", title: "Enterprise ML Pipelines",
-      tone: "light", cols: 2, rows: 1,
-      tagline: "Azure ML Studio and Synapse pipelines for extraction, classification and analytics.",
-      metricShort: "Azure ML · Synapse", metric: "Azure",
-      metricLabel: "ML Studio, Synapse and DevOps, end to end",
-      summary: "Production ML pipelines on Azure that turn unstructured enterprise data into classified, analysable records.",
-      flow: ["Unstructured data ingest", "Extraction", "Classification", "Analytics"],
+      id: "eval", code: "Q·03", kind: "LLM evaluation", title: "LLM Testing & Evaluation",
+      tone: "dark", cols: 2, rows: 2,
+      tagline: "Adversarial probing, jailbreak detection and model-graded evals: breaking chatbots on purpose, before users do.",
+      metricShort: "Red-team + model-graded", metric: "Evals",
+      metricLabel: "adversarial, jailbreak and model-graded quality checks",
+      summary: "A framework for breaking chatbots on purpose, before users do, and scoring response quality at scale.",
+      flow: ["Adversarial probes", "Jailbreak detection", "Model-graded evaluation", "Quality report"],
       highlights: [
-        "Built ML pipelines on Azure ML Studio and Synapse for extraction, classification and analytics.",
-        "Automated Azure DevOps test-data extraction into Excel with Power Query M-code, fixing API pagination and column-conflict bugs.",
+        "Built adversarial probing and jailbreak-detection suites to stress-test chatbot safety.",
+        "Designed model-graded evaluations to check response quality.",
       ],
-      tech: ["Azure ML Studio", "Azure Synapse", "Azure DevOps", "Power Query", "Python"],
+      tech: ["Adversarial Probing", "Jailbreak Detection", "Model-Graded Eval", "Python"],
     },
     {
       id: "idx", code: "Q·02", kind: "RAG · Search", title: "Knowledge Assistants",
@@ -102,6 +90,20 @@ export const qualitest: Role = {
         "Tuned the prompts powering internal knowledge assistants.",
       ],
       tech: ["Docker", "Vector Search", "Agentic Retrieval", "Prompt Engineering"],
+    },
+    {
+      id: "azml", code: "Q·01", kind: "ML pipelines", title: "Enterprise ML Pipelines",
+      tone: "light", cols: 2, rows: 1,
+      tagline: "Azure ML Studio and Synapse pipelines for extraction, classification and analytics.",
+      metricShort: "Azure ML · Synapse", metric: "Azure",
+      metricLabel: "ML Studio, Synapse and DevOps, end to end",
+      summary: "Production ML pipelines on Azure that turn unstructured enterprise data into classified, analysable records.",
+      flow: ["Unstructured data ingest", "Extraction", "Classification", "Analytics"],
+      highlights: [
+        "Built ML pipelines on Azure ML Studio and Synapse for extraction, classification and analytics.",
+        "Automated Azure DevOps test-data extraction into Excel with Power Query M-code, fixing API pagination and column-conflict bugs.",
+      ],
+      tech: ["Azure ML Studio", "Azure Synapse", "Azure DevOps", "Power Query", "Python"],
     },
   ],
 };
@@ -119,13 +121,13 @@ export const rudhra: Role = {
       id: "mlr", code: "R·01", kind: "Multi-agent · RAG", title: "MLR Review",
       tone: "dark", cols: 4, rows: 2, featured: true,
       tagline: "AI-assisted Medical/Legal/Regulatory review for pharma promotional content, grounding every claim in approved source documents.",
-      metricShort: "400+ pluggable check agents", metric: "400+",
-      metricLabel: "pluggable compliance-check agents across Medical, Legal, Regulatory and Branding",
+      metricShort: "50+ agents · 400+ checks", metric: "400+",
+      metricLabel: "compliance checks run by 50+ pluggable agents across Medical, Legal, Regulatory and Branding",
       summary:
         "An AI-assisted Medical/Legal/Regulatory compliance review backend for pharma promotional content, validating claims against approved source documents via a RAG-grounded, multi-agent LLM pipeline, delivered as a Veeva Vault custom page.",
-      flow: ["PDF extraction", "LLM classification", "400+ check agents, run concurrently", "Quote verification against source", "Report assembly"],
+      flow: ["PDF extraction", "LLM classification", "50+ check agents, run concurrently", "Quote verification against source", "Report assembly"],
       highlights: [
-        "Built a 4-stage async pipeline (PDF extraction → LLM classification → concurrent check-agent execution → report assembly) with 11 pluggable compliance-check agents across Medical, Legal, Regulatory and Branding.",
+        "Built a 4-stage async pipeline (PDF extraction → LLM classification → concurrent check-agent execution → report assembly) with 50+ pluggable compliance-check agents running 400+ checks across Medical, Legal, Regulatory and Branding.",
         "Architected an anti-hallucination verification layer that checks every LLM-cited quote against the actual retrieved source text before trusting it, with automatic fail-safes on unverifiable or cross-product evidence.",
         "Diagnosed and fixed a silent RAG retrieval-quality regression and a scheduler networking bug in the self-hosted retrieval service; planned its GCP-to-local-Docker migration.",
         "Prototyped OpenSearch (BM25 + kNN hybrid search, RRF fusion) as a comparative retrieval evaluation against the production Weaviate-based hybrid search.",
@@ -134,21 +136,47 @@ export const rudhra: Role = {
       tech: ["Python", "RAG", "Multi-Agent LLM", "Weaviate", "OpenSearch", "Veeva Vault Web SDK", "React", "Docker", "PostgreSQL", "GCP"],
     },
     {
-      id: "cms", code: "R·02", kind: "Platform · MCP", title: "Sciagen CMS",
+      id: "cms", code: "R·02", kind: "Platform · Compliance", title: "Sciagen CMS",
       tone: "light", cols: 2, rows: 1,
-      tagline: "Multi-tenant SaaS for pharma content, MLR review, approvals and digital assets.",
-      metricShort: "1,000+ automated tests", metric: "1,000+",
-      metricLabel: "automated tests behind GitHub Actions CI/CD",
+      tagline: "Multi-tenant SaaS for pharma marketing content. I built its e-signature and document-lifecycle engine, a race-safe hash-chained audit trail and multi-cloud storage.",
+      metricShort: "E-signatures · hash-chained audit", metric: "E-sign",
+      metricLabel: "signing rules derived from workflow transitions, with intent validation and a tamper-evident audit trail",
       summary:
-        "A multi-tenant content management and compliance workflow platform for pharmaceutical marketing material, with an MCP server that exposes compliance data to AI agents.",
-      flow: ["Content intake & asset storage", "Claims substantiation linking", "Per-country regulatory rulebooks", "Multi-stage e-signature approval", "Hash-chained audit log"],
-      highlights: [
-        "Migrated the backend from SQLite to PostgreSQL, preserving 70+ sequential schema migrations with zero data loss.",
-        "Refactored a 100+ file Express backend into repository and service layers, with a pluggable AWS S3 / Azure Blob storage abstraction.",
-        "Built an approval engine with e-signatures, parallel multi-reviewer approval, emergency bypass and tamper-evident audit logging.",
-        "Built an MCP server exposing compliance data as agent tools, plus AI claims harvesting and document chat on the Anthropic API.",
+        "A multi-tenant SaaS platform for pharmaceutical marketing content, managing MLR review workflows, regulatory approval and digital-asset compliance.",
+      flow: ["Content & asset intake", "MLR review workflow", "Transition-driven e-signature", "Lifecycle controls: withdraw, lock, re-version", "Hash-chained audit trail"],
+      highlights: [],
+      highlightGroups: [
+        {
+          title: "Workflow & compliance engine",
+          items: [
+            "Built the e-signature authorization model end to end, deriving signing requirements from workflow transition configuration rather than static stage ownership, with strict validation that signing intent matches the transition being performed.",
+            "Implemented document lifecycle controls governing when a document can be withdrawn, version-locked or re-versioned based on stage, role and timing, closing gaps that let unauthorized users bypass state rules.",
+            "Built role-based content access control restricting promotional vs. non-promotional document creation by role, including a full audit and fix of content-type classification gaps.",
+            "Added five annotation types (line, anchor, permalink, document-link, find-in-document) to the document viewer.",
+            "Built fuzzy claim matching for the compliance claim-scanning engine, tolerating minor text insertions instead of requiring exact matches.",
+          ],
+        },
+        {
+          title: "Platform & admin capabilities",
+          items: [
+            "Designed and shipped tenant-configurable platform limits (max asset upload size, max users per tenant) and a new view-only stakeholder role.",
+            "Built the audit trail for asset upload, delete and download activity, then hardened it against concurrent write races with serialized hash-chain writes.",
+            "Delivered tenant adoption and usage analytics from scratch, including a PDF report renderer and live period-filtered dashboards, replacing a costlier cloud-monitoring-based approach.",
+            "Migrated session state to a shared Postgres-backed store, enabling multi-instance backend deployment.",
+            "Published full OpenAPI documentation and Swagger UI coverage for the platform's public and admin APIs.",
+          ],
+        },
+        {
+          title: "Infrastructure & multi-cloud",
+          items: [
+            "Designed a pluggable storage abstraction adding Azure Blob Storage alongside AWS S3, with tenant-level configuration, connection testing and asset-migration tooling.",
+            "Containerized the full stack (backend, frontend and CI environment) with Docker, enabling build-artifact-only deployment for clients hosting on their own infrastructure.",
+            "Led a schema-wide data standardization effort and a regression-tested merge of a long-diverged feature branch, resolving conflicts across the scheduler, dependencies and several frontend surfaces without losing functionality from either branch.",
+            "Set up SonarQube static analysis in CI and drove down cognitive-complexity and accessibility issues across the codebase.",
+          ],
+        },
       ],
-      tech: ["Node.js", "TypeScript", "Express", "PostgreSQL", "MCP", "Anthropic API", "AWS S3", "Azure Blob", "Docker", "GitHub Actions"],
+      tech: ["Node.js", "TypeScript", "Express", "PostgreSQL", "AWS S3", "Azure Blob", "Docker", "OpenAPI / Swagger", "SonarQube", "CI"],
     },
     {
       id: "crm", code: "R·03", kind: "Agent · LangGraph", title: "CRM AI Assistant",
@@ -236,7 +264,8 @@ export const certifications = [
   { issuer: "Udemy", title: "Azure DevOps Fundamentals" },
 ];
 
-export const allProjects: Project[] = [...qualitest.projects, ...rudhra.projects];
+// Newest first — matches the order on the page, so "Next →" in the drawer walks it top to bottom.
+export const allProjects: Project[] = [...rudhra.projects, ...qualitest.projects];
 
 export function findRole(id: string): Role {
   return rudhra.projects.some((p) => p.id === id) ? rudhra : qualitest;

@@ -2,6 +2,7 @@
 
 import type { Project } from "@/data/profile";
 import { useTilt } from "./useTilt";
+import ProjectArt from "./ProjectArt";
 
 export default function ProjectCard({ project: p, onOpen }: { project: Project; onOpen: (id: string) => void }) {
   const tilt = useTilt<HTMLButtonElement>(p.cols >= 4 ? 4.5 : 9);
@@ -19,6 +20,9 @@ export default function ProjectCard({ project: p, onOpen }: { project: Project; 
       <span className="tile__top">
         <span className="mono tile__mut tile__code">{p.code}</span>
         <span className="mono tile__pill">{p.kind}</span>
+      </span>
+      <span className="tile__art" aria-hidden="true">
+        <ProjectArt id={p.id} />
       </span>
       <span className="tile__spacer" />
       {p.featured && (

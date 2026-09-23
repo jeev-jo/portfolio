@@ -57,8 +57,8 @@ export default function Hero() {
         <div className="card bento__stat bento__stat--small rise d5">
           <span className="eyebrow mono">Agents</span>
           <div>
-            <div className="serif stat-num">400+</div>
-            <div className="muted small">pluggable check agents</div>
+            <div className="serif stat-num">50+</div>
+            <div className="muted small">pluggable compliance agents</div>
           </div>
         </div>
 
@@ -73,9 +73,9 @@ export default function Hero() {
         <div className="card bento__stat bento__stat--row rise d6">
           <div className="bento__stat-label">
             <span className="eyebrow mono">Rigor</span>
-            <span className="muted small">automated tests, one platform</span>
+            <span className="muted small">compliance checks, one pipeline</span>
           </div>
-          <span className="serif stat-num stat-num--xl">1k<em className="accent">+</em></span>
+          <span className="serif stat-num stat-num--xl">400<em className="accent">+</em></span>
         </div>
 
         <div className="bento__links rise d6">
