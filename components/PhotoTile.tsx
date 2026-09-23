@@ -18,7 +18,6 @@ export default function PhotoTile() {
       <div className="glare" aria-hidden="true" />
       <div className="bento__photo-caption">
         <span className="mono tag tag--light">Ajay Jeevan Jose</span>
-        <span className="mono tag tag--dark">Fig. 00</span>
       </div>
     </div>
   );
