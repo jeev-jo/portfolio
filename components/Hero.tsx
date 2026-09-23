@@ -57,7 +57,7 @@ export default function Hero() {
         <div className="card bento__stat bento__stat--small rise d5">
           <span className="eyebrow mono">Agents</span>
           <div>
-            <div className="serif stat-num">11</div>
+            <div className="serif stat-num">400+</div>
             <div className="muted small">pluggable check agents</div>
           </div>
         </div>

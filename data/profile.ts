@@ -119,11 +119,11 @@ export const rudhra: Role = {
       id: "mlr", code: "R·01", kind: "Multi-agent · RAG", title: "MLR Review",
       tone: "dark", cols: 4, rows: 2, featured: true,
       tagline: "AI-assisted Medical/Legal/Regulatory review for pharma promotional content, grounding every claim in approved source documents.",
-      metricShort: "11 pluggable check agents", metric: "11",
+      metricShort: "400+ pluggable check agents", metric: "400+",
       metricLabel: "pluggable compliance-check agents across Medical, Legal, Regulatory and Branding",
       summary:
         "An AI-assisted Medical/Legal/Regulatory compliance review backend for pharma promotional content, validating claims against approved source documents via a RAG-grounded, multi-agent LLM pipeline, delivered as a Veeva Vault custom page.",
-      flow: ["PDF extraction", "LLM classification", "11 check agents, run concurrently", "Quote verification against source", "Report assembly"],
+      flow: ["PDF extraction", "LLM classification", "400+ check agents, run concurrently", "Quote verification against source", "Report assembly"],
       highlights: [
         "Built a 4-stage async pipeline (PDF extraction → LLM classification → concurrent check-agent execution → report assembly) with 11 pluggable compliance-check agents across Medical, Legal, Regulatory and Branding.",
         "Architected an anti-hallucination verification layer that checks every LLM-cited quote against the actual retrieved source text before trusting it, with automatic fail-safes on unverifiable or cross-product evidence.",
