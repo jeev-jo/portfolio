@@ -68,7 +68,6 @@ export default function Globe() {
         </div>
       </div>
       <div className="globe__top">
-        <span className="mono">Fig. 01</span>
         <span className="mono">
           {rot.active ? `rx ${Math.round(rot.rx)}° · ry ${Math.round(rot.ry)}°` : `${N} nodes`}
         </span>

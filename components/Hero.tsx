@@ -30,7 +30,6 @@ export default function Hero() {
         <PhotoTile />
 
         <div className="card bento__thesis rise d2">
-          <span className="eyebrow mono">(01) — Thesis</span>
           <div className="bento__thesis-body">
             <p className="serif bento__thesis-quote">
               I build AI systems that have to <em className="accent">show their work.</em>
