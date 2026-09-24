@@ -14,8 +14,8 @@ export default function Header() {
         </a>
 
         <div className="navpills">
-          <a className="navpill" href="#journey">Journey</a>
-          <a className="navpill" href="#work">Work</a>
+          <a className="navpill" href="#journey">Work</a>
+          <a className="navpill" href="#education">Education</a>
           <a className="navpill" href="#stack">Toolkit</a>
           <a className="navpill" href="#contact">Contact</a>
         </div>

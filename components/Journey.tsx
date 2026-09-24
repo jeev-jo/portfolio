@@ -97,8 +97,8 @@ export default function Journey() {
       <WorkChapter id="work" n="04" role={rudhra} onOpen={open} current />
       <WorkChapter n="03" role={qualitest} onOpen={open} />
 
-      {[...education].reverse().map((e) => (
-        <div key={e.n} className="chapter">
+      {[...education].reverse().map((e, i) => (
+        <div key={e.n} id={i === 0 ? "education" : undefined} className="chapter">
           <ChapterHead n={e.n} eyebrow={e.eyebrow} meta={e.place} score={e.score} title={e.title} text={e.text} />
         </div>
       ))}

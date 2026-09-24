@@ -19,7 +19,9 @@ function Check({ x, y }: { x: number; y: number }) {
   );
 }
 
-const art: Record<string, { label: string; viewBox: string; body: ReactElement }> = {
+type Art = { label: string; viewBox: string; body: ReactElement; compact?: { viewBox: string; body: ReactElement } };
+
+const art: Record<string, Art> = {
   // R·01 — claims traced through quote verification to approved sources
   mlr: {
     label: "Claims in a promotional piece are traced through a verification step to approved sources; a claim with no match is flagged.",
@@ -58,6 +60,44 @@ const art: Record<string, { label: string; viewBox: string; body: ReactElement }
         <path d="M558 169 l8 8 M566 169 l-8 8" fill="none" className="s-mid" strokeWidth={1.6} strokeLinecap="round" />
       </>
     ),
+    // Phone-width version: same story, narrower canvas, labels stay readable.
+    compact: {
+      viewBox: "0 0 320 200",
+      body: (
+        <>
+          <rect x="10" y="14" width="112" height="160" rx="6" className="f-card s-faint" />
+          <rect x="22" y="28" width="56" height="6" rx="2" className="f-mid" />
+          {[46, 76, 92, 122, 152].map((y) => (
+            <rect key={y} x="22" y={y} width="86" height="5" rx="2" className="f-faint" />
+          ))}
+          <rect x="22" y="60" width="80" height="7" rx="2" className="f-hi" />
+          <rect x="22" y="106" width="70" height="7" rx="2" className="f-hi" />
+          <rect x="22" y="136" width="64" height="7" rx="2" fill="none" className="s-mid" strokeDasharray="3 3" />
+          <text x="10" y="192" fontSize="10" {...mono}>CLAIMS</text>
+          <rect x="142" y="14" width="40" height="160" rx="8" fill="none" className="s-faint" />
+          <text x="162" y="192" textAnchor="middle" fontSize="10" {...mono}>VERIFY</text>
+          <path d="M102 63 C 125 63 135 38 162 38 L 208 38" fill="none" className="s-hi" strokeWidth={1.5} />
+          <path d="M92 110 C 125 110 135 100 162 100 L 208 100" fill="none" className="s-hi" strokeWidth={1.5} />
+          <path d="M86 140 C 120 140 135 162 162 162 L 208 162" fill="none" className="s-mid" strokeWidth={1.5} strokeDasharray="4 4" />
+          <circle cx="162" cy="38" r="4.5" className="f-hi" />
+          <circle cx="162" cy="100" r="4.5" className="f-hi" />
+          <circle cx="162" cy="162" r="4.5" fill="none" className="s-mid" />
+          {[16, 78].map((y) => (
+            <g key={y}>
+              <rect x="208" y={y} width="102" height="44" rx="7" className="f-card s-faint" />
+              <circle cx="226" cy={y + 22} r="9" className="f-hi" />
+              <Check x={226} y={y + 22} />
+              <rect x="242" y={y + 14} width="52" height="5" rx="2" className="f-faint" />
+              <text x="242" y={y + 32} fontSize="9" {...mono}>SOURCE</text>
+            </g>
+          ))}
+          <rect x="208" y="140" width="102" height="44" rx="7" fill="none" className="s-mid" strokeDasharray="4 4" />
+          <circle cx="226" cy="162" r="9" fill="none" className="s-mid" />
+          <path d="M222.5 158.5 l7 7 M229.5 158.5 l-7 7" fill="none" className="s-mid" strokeWidth={1.5} strokeLinecap="round" />
+          <text x="242" y="165" fontSize="9" {...mono}>FLAGGED</text>
+        </>
+      ),
+    },
   },
 
   // R·02 — e-signature gate on a workflow transition, over a hash-chained audit trail
@@ -238,16 +278,26 @@ const art: Record<string, { label: string; viewBox: string; body: ReactElement }
 export default function ProjectArt({ id, className }: { id: string; className?: string }) {
   const a = art[id];
   if (!a) return null;
-  return (
+  const svg = (viewBox: string, body: ReactElement, variant?: string, hidden?: boolean) => (
     <svg
-      className={className}
-      viewBox={a.viewBox}
+      className={[className, variant].filter(Boolean).join(" ") || undefined}
+      viewBox={viewBox}
       preserveAspectRatio="xMidYMid meet"
-      role="img"
-      aria-label={a.label}
+      role={hidden ? undefined : "img"}
+      aria-label={hidden ? undefined : a.label}
+      aria-hidden={hidden || undefined}
       focusable="false"
     >
-      {a.body}
+      {body}
     </svg>
+  );
+  if (!a.compact) return svg(a.viewBox, a.body);
+  // Both variants render; CSS shows one per screen width (display:none also removes the
+  // other from the accessibility tree, so the diagram is announced once).
+  return (
+    <>
+      {svg(a.viewBox, a.body, "art-wide")}
+      {svg(a.compact.viewBox, a.compact.body, "art-compact")}
+    </>
   );
 }

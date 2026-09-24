@@ -70,8 +70,9 @@ h1, h2, h3, p { margin: 0; }
 .word { display: inline-block; animation: riseWord 1.1s var(--ease) both; }
 .w1 { animation-delay: .05s; } .w2 { animation-delay: .15s; } .w3 { animation-delay: .3s; }
 
-.reveal { opacity: 0; transform: translateY(40px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
-.reveal.is-in { opacity: 1; transform: none; }
+/* Hidden only when JS runs (layout adds .js), so the page still reads if scripts fail. */
+.js .reveal { opacity: 0; transform: translateY(40px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.js .reveal.is-in { opacity: 1; transform: none; }
 
 .live { width: 8px; height: 8px; border-radius: 50%; background: #fff; animation: pulse 1.8s ease-out infinite; flex-shrink: 0; }
 
@@ -100,7 +101,7 @@ h1, h2, h3, p { margin: 0; }
 /* ============ Header ============ */
 .masthead {
   position: sticky; top: 0; z-index: 30;
-  background: rgba(243,240,232,.82);
+  background: rgba(243,240,232,.95);
   backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--line);
 }
@@ -341,6 +342,7 @@ h1, h2, h3, p { margin: 0; }
 .tile--feat .tile__art { height: auto; min-height: 220px; flex-grow: 1; }
 .tile--feat .tile__spacer { display: none; }
 .tile__art svg, .drawer__art svg { display: block; width: 100%; height: 100%; }
+.tile__art svg.art-compact, .drawer__art svg.art-compact { display: none; }
 .drawer__art { height: 210px; padding: 10px; border-radius: 18px; background: var(--art-bg); }
 .f-ink { fill: var(--art-ink); } .f-mid { fill: var(--art-mid); } .f-faint { fill: var(--art-faint); }
 .f-card { fill: var(--art-card); } .f-hi { fill: var(--art-hi); }
@@ -400,11 +402,16 @@ h1, h2, h3, p { margin: 0; }
   .projects { grid-template-columns: minmax(0, 1fr); }
   .tile, .tile--wide, .tile--tall { grid-column: auto; grid-row: auto; min-height: 220px; }
   .tile--feat .tile__title { font-size: 42px; }
-  .tile--feat .tile__art { height: 160px; }
-  .drawer__art { height: 150px; }
+  .drawer__art { height: 230px; }
+  .tile__art svg.art-wide, .drawer__art svg.art-wide { display: none; }
+  .tile__art svg.art-compact, .drawer__art svg.art-compact { display: block; }
+  .tile--feat .tile__art { min-height: 230px; }
   .stack, .certs { grid-template-columns: minmax(0, 1fr); }
   .stack__group, .stack__group.tone--dark, .stack__group.tone--blue { grid-column: auto; }
-  .drawer { top: 0; right: 0; bottom: 0; max-width: 100%; width: 100%; border-radius: 0; }
+  /* Bottom sheet: leaves a strip of backdrop at the top so a tap outside closes it. */
+  .drawer { top: 64px; right: 0; bottom: 0; left: 0; max-width: 100%; width: 100%; border-radius: 22px 22px 0 0; transform-origin: center bottom; }
+  .drawer--in { animation: sheetIn .5s var(--ease) both; }
+  .drawer--out { animation: sheetOut .3s ease both; }
   .drawer__bar { padding: 12px 18px; }
   .drawer__crumb { font-size: 10px; }
   .drawer__body { padding: 24px 18px 40px; }
@@ -420,6 +427,9 @@ h1, h2, h3, p { margin: 0; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
-  .reveal { opacity: 1; transform: none; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
   html { scroll-behavior: auto; }
 }
+
+@keyframes sheetIn { from { transform: translateY(100%); } to { transform: none; } }
+@keyframes sheetOut { from { transform: none; } to { transform: translateY(100%); } }

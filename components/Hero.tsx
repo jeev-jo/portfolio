@@ -1,4 +1,5 @@
-import { links } from "@/data/profile";
+import { experienceYears, links } from "@/data/profile";
+import Experience from "./Experience";
 import PhotoTile from "./PhotoTile";
 import Globe from "./Globe";
 
@@ -22,7 +23,7 @@ export default function Hero() {
           </span>
         </h1>
         <p className="hero__intro rise d2">
-          Three years putting LLMs into production for pharma, where every answer has to cite its source and survive an audit.
+          <Experience initial={experienceYears()} as="words" /> years putting LLMs into production, now for pharma, where every answer has to cite its source and survive an audit.
         </p>
       </div>
 
@@ -66,7 +67,7 @@ export default function Hero() {
             <span className="eyebrow mono">In production</span>
             <span className="muted small">years shipping GenAI</span>
           </div>
-          <span className="serif stat-num stat-num--xl">3<em className="accent">+</em></span>
+          <span className="serif stat-num stat-num--xl"><Experience initial={experienceYears()} /><em className="accent">+</em></span>
         </div>
 
         <div className="card bento__stat bento__stat--row rise d6">

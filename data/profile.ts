@@ -7,6 +7,26 @@ export const links = {
   resume: "/Ajay_Jeevan_Jose_Resume.pdf",
 };
 
+// ---------- Experience length ----------
+// Counted from the first listed role (Qualitest, Mar 2024) — only experience shown on this site.
+// Computed at view time, so the number stays correct without any redeploy or CI job.
+export const careerStart = { year: 2024, month: 3 }; // month is 1-12
+
+/** Whole half-years of experience at `now`, e.g. 2.5 (floored, never rounded up). */
+export function experienceYears(now: Date = new Date()): number {
+  const months = (now.getFullYear() - careerStart.year) * 12 + (now.getMonth() + 1 - careerStart.month);
+  return Math.max(0, Math.floor(months / 6) / 2);
+}
+
+const WORDS = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve"];
+
+/** 2.5 → "Two and a half", 3 → "Three". */
+export function experienceWords(years: number): string {
+  const whole = Math.floor(years);
+  const w = WORDS[whole] ?? String(whole);
+  return years % 1 ? `${w} and a half` : w;
+}
+
 export type Tone = "light" | "dark" | "blue";
 
 export type Project = {
@@ -124,14 +144,14 @@ export const rudhra: Role = {
       metricShort: "50+ agents · 400+ checks", metric: "400+",
       metricLabel: "compliance checks run by 50+ pluggable agents across Medical, Legal, Regulatory and Branding",
       summary:
-        "An AI-assisted Medical/Legal/Regulatory compliance review backend for pharma promotional content, validating claims against approved source documents via a RAG-grounded, multi-agent LLM pipeline, delivered as a Veeva Vault custom page.",
+        "An AI-assisted Medical/Legal/Regulatory compliance review system for pharma promotional content. I built the entire backend: a RAG-grounded, multi-agent LLM pipeline that validates every claim against approved source documents. Reviewers see the results in a Veeva Vault custom page that I contributed to.",
       flow: ["PDF extraction", "LLM classification", "50+ check agents, run concurrently", "Quote verification against source", "Report assembly"],
       highlights: [
-        "Built a 4-stage async pipeline (PDF extraction → LLM classification → concurrent check-agent execution → report assembly) with 50+ pluggable compliance-check agents running 400+ checks across Medical, Legal, Regulatory and Branding.",
+        "Built the entire backend: a 4-stage async pipeline (PDF extraction → LLM classification → concurrent check-agent execution → report assembly) with 50+ pluggable compliance-check agents running 400+ checks across Medical, Legal, Regulatory and Branding.",
         "Architected an anti-hallucination verification layer that checks every LLM-cited quote against the actual retrieved source text before trusting it, with automatic fail-safes on unverifiable or cross-product evidence.",
         "Diagnosed and fixed a silent RAG retrieval-quality regression and a scheduler networking bug in the self-hosted retrieval service; planned its GCP-to-local-Docker migration.",
         "Prototyped OpenSearch (BM25 + kNN hybrid search, RRF fusion) as a comparative retrieval evaluation against the production Weaviate-based hybrid search.",
-        "Built the review UI as a Veeva Vault Web SDK custom page (React), plus a lightweight standalone tool for local testing outside Vault.",
+        "Contributed to the review UI, a React custom page on the Veeva Vault Web SDK, and to a standalone tool for testing locally outside Vault.",
       ],
       tech: ["Python", "RAG", "Multi-Agent LLM", "Weaviate", "OpenSearch", "Veeva Vault Web SDK", "React", "Docker", "PostgreSQL", "GCP"],
     },
