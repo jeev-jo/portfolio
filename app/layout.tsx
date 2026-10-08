@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono", disp
 
 const title = "Ajay Jeevan Jose — AI Engineer";
 const description =
-  "AI/ML engineer building multi-agent LLM pipelines, hybrid RAG and LLM evaluation for regulated pharma and life sciences.";
+  "AI/ML engineer building multi-agent LLM pipelines, hybrid RAG, fine-tuned transformer models and LLM evaluation, currently in pharma and life sciences.";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
   ?? (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000");

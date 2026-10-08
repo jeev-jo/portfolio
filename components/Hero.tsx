@@ -8,8 +8,8 @@ export default function Hero() {
     <section id="top" className="hero container">
       <div className="hero__meta mono rise">
         <span>AI / ML Engineer</span>
-        <span>Agentic systems · RAG · LLM evaluation</span>
-        <span>Regulated life sciences</span>
+        <span>Agentic systems · RAG · Fine-tuning</span>
+        <span>LLM evaluation</span>
       </div>
 
       <div className="hero__namewrap">
@@ -23,7 +23,7 @@ export default function Hero() {
           </span>
         </h1>
         <p className="hero__intro rise d2">
-          <Experience initial={experienceYears()} as="words" /> years putting LLMs into production, now for pharma, where every answer has to cite its source and survive an audit.
+          <Experience initial={experienceYears()} as="words" /> years shipping LLM agents, retrieval and fine-tuned transformer models to production, currently in pharma.
         </p>
       </div>
 
@@ -36,7 +36,7 @@ export default function Hero() {
               I build AI systems that have to <em className="accent">show their work.</em>
             </p>
             <p className="muted">
-              Multi-agent pipelines, hybrid RAG and evaluation for pharma, built for FDA 21 CFR Part 11, GxP and auditors who read the logs.
+              Multi-agent pipelines, hybrid RAG and fully fine-tuned transformer models, built evaluation-first and shipped to production.
             </p>
           </div>
         </div>

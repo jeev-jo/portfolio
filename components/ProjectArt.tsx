@@ -132,9 +132,9 @@ const art: Record<string, Art> = {
     ),
   },
 
-  // R·03 — six narrowing routing layers into the side-panel assistant
+  // R·03 — six narrowing intent layers into the side-panel agent; the fine-tuned model layer is highlighted
   crm: {
-    label: "A browser with a side panel; requests pass through six narrowing routing layers into the assistant.",
+    label: "A browser with a side panel; requests pass through six narrowing intent layers, one of them a fine-tuned ModernBERT classifier, into the assistant.",
     viewBox: "0 0 320 150",
     body: (
       <>
@@ -146,10 +146,15 @@ const art: Record<string, Art> = {
         <rect x="232" y="64" width="62" height="14" rx="7" className="f-ink" />
         <rect x="216" y="84" width="50" height="14" rx="7" className="f-faint" />
         <rect x="232" y="104" width="46" height="14" rx="7" className="f-ink" />
-        {[0, 1, 2, 3, 4, 5].map((i) => (
-          <rect key={i} x={30 + i * 12} y={44 + i * 14} width={156 - i * 24} height="8" rx="4" className="f-ink" opacity={0.25 + i * 0.15} />
-        ))}
-        <path d="M130 118 C 170 118 180 71 222 71" fill="none" className="s-ink" strokeWidth={1.4} strokeDasharray="3 3" />
+        {[0, 1, 2, 3, 4, 5].map((i) =>
+          i === 3 ? (
+            <rect key={i} x={30 + i * 12} y={40 + i * 13} width={156 - i * 24} height="8" rx="4" className="f-hi" />
+          ) : (
+            <rect key={i} x={30 + i * 12} y={40 + i * 13} width={156 - i * 24} height="8" rx="4" className="f-mid" opacity={0.45 + i * 0.1} />
+          )
+        )}
+        <text x="30" y="128" fontSize="8" {...mono}>6 LAYERS · FINE-TUNED MODERNBERT</text>
+        <path d="M128 109 C 168 109 180 71 222 71" fill="none" className="s-ink" strokeWidth={1.4} strokeDasharray="3 3" />
       </>
     ),
   },

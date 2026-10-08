@@ -135,7 +135,7 @@ export const rudhra: Role = {
   period: "Apr 2026 – Present",
   eyebrow: "Now · agents in pharma",
   blurb:
-    "Multi-agent compliance review, hybrid retrieval over regulated corpora, and MCP-connected assistants, built so an auditor can trace every decision.",
+    "Multi-agent compliance review, hybrid retrieval, MCP-connected assistants and a fully fine-tuned intent classifier, built so every decision can be traced.",
   projects: [
     {
       id: "mlr", code: "R·01", kind: "Multi-agent · RAG", title: "MLR Review",
@@ -199,20 +199,35 @@ export const rudhra: Role = {
       tech: ["Node.js", "TypeScript", "Express", "PostgreSQL", "AWS S3", "Azure Blob", "Docker", "OpenAPI / Swagger", "SonarQube", "CI"],
     },
     {
-      id: "crm", code: "R·03", kind: "Agent · LangGraph", title: "CRM AI Assistant",
+      id: "crm", code: "R·03", kind: "Agent · Fine-tuned NLP", title: "CRM AI Assistant",
       tone: "blue", cols: 2, rows: 1,
-      tagline: "A Chrome side-panel agent inside the CRM, with live browser context.",
-      metricShort: "6-layer intent routing", metric: "6",
-      metricLabel: "layers of intent detection route every request",
+      tagline: "A Chrome side-panel agent inside the CRM, with six-layer intent routing that includes a fully fine-tuned ModernBERT classifier.",
+      metricShort: "6-layer routing · fine-tuned ModernBERT", metric: "~150M",
+      metricLabel: "ModernBERT-base parameters, all fine-tuned, serving the intent classifier through ONNX on CPU",
       summary:
-        "A side-panel AI assistant on a Python backend that lives inside the CRM, understands what is on screen, and acts through MCP tools, with a human in the loop for anything destructive.",
+        "A side-panel AI assistant on a Python backend that lives inside the CRM, understands what is on screen, and acts through MCP tools, with a human in the loop for anything destructive. Its six-layer intent pipeline includes a ModernBERT-base classifier that I fully fine-tuned and serve through ONNX on CPU.",
       flow: ["Regex fast-path", "Embedding similarity", "Small language model router", "LangGraph orchestrator", "MCP tool layer", "Human approval gate"],
-      highlights: [
-        "Designed a six-layer intent pipeline (regex, then embeddings, then a small language model) to route requests cheaply and accurately.",
-        "Wired a LangGraph orchestrator over an MCP tool layer with multi-turn memory and live browser context.",
-        "Added human approval gates for destructive actions and real-time token streaming.",
+      highlights: [],
+      highlightGroups: [
+        {
+          title: "The agent",
+          items: [
+            "Designed a six-layer intent pipeline (regex, then embeddings, then a small language model) to route requests cheaply and accurately.",
+            "Wired a LangGraph orchestrator over an MCP tool layer with multi-turn memory and live browser context.",
+            "Added human approval gates for destructive actions and real-time token streaming.",
+          ],
+        },
+        {
+          title: "Fine-tuned intent classifier",
+          items: [
+            "Fully fine-tuned ModernBERT-base as the pipeline's intent classifier: all ~150M parameters trained, with no frozen layers or adapters.",
+            "Built the training data from synthetic messages generated with the Claude Batch API plus hand-labelled real messages, cleaned with near-duplicate and test-leakage filtering and confident-learning label review.",
+            "Calibrated the model's confidence with temperature scaling, so an uncertain message gets a clarification question instead of a wrong action.",
+            "Exported the model to ONNX for torch-free, low-latency CPU inference, and integrated it into the FastAPI / LangGraph agent behind a config switch, with a rule-based fallback and Docker deployment.",
+          ],
+        },
       ],
-      tech: ["Python", "LangGraph", "MCP", "Chrome Extension", "Streaming"],
+      tech: ["Python", "LangGraph", "MCP", "PyTorch", "Hugging Face", "ModernBERT", "ONNX Runtime", "FastAPI", "Docker", "Chrome Extension", "Streaming"],
     },
     {
       id: "doc", code: "R·04", kind: "Hybrid retrieval", title: "Compliance & Document Intelligence",
@@ -272,7 +287,11 @@ export const stack: StackGroup[] = [
     items: ["Azure AI", "AWS Bedrock", "GCP", "Docker", "Kubernetes", "GitHub Actions", "PostgreSQL", "Redis", "Weaviate", "OpenSearch", "Neo4j", "Qdrant", "Pinecone", "pgvector", "FAISS"],
   },
   {
-    name: "Domain", cols: 4, tone: "blue",
+    name: "ML / NLP", cols: 2, tone: "light",
+    items: ["PyTorch", "Hugging Face Transformers", "ONNX Runtime", "scikit-learn", "NumPy", "SciPy", "Fine-tuning", "Text Classification", "Synthetic Data", "Confident Learning", "Calibration", "Error Analysis"],
+  },
+  {
+    name: "Domain", cols: 2, tone: "blue",
     items: ["FDA 21 CFR Part 11", "GxP", "GAMP 5", "EU Annex 11", "EMA", "ICH", "SOP / URS authoring", "Veeva Vault"],
   },
 ];
