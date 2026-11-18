@@ -22,7 +22,127 @@ function Check({ x, y }: { x: number; y: number }) {
 type Art = { label: string; viewBox: string; body: ReactElement; compact?: { viewBox: string; body: ReactElement } };
 
 const art: Record<string, Art> = {
-  // R·01 — claims traced through quote verification to approved sources
+  // R·01 — IKM: upload → security scan → queue workers → chunk/embed → per-repository shards → cited results
+  ikm: {
+    label: "IKM pipeline: a document is uploaded, security-scanned, parsed by queue workers, chunked and embedded into per-repository index shards, then found by hybrid search with reranking and returned with a citation.",
+    viewBox: "0 0 760 220",
+    body: (
+      <>
+        <rect x="36" y="70" width="56" height="72" rx="5" className="f-card s-mid" />
+        <rect x="44" y="62" width="56" height="72" rx="5" className="f-card s-mid" />
+        <rect x="52" y="54" width="56" height="72" rx="5" className="f-card s-ink" />
+        {[66, 76, 86, 96].map((y, i) => (
+          <rect key={y} x="60" y={y} width={[40, 34, 40, 28][i]} height="4" rx="2" className="f-faint" />
+        ))}
+        <path d="M114 100 H150" className="s-mid" strokeWidth={1.4} />
+        <path d="M145 95 L151 100 L145 105" fill="none" className="s-mid" strokeWidth={1.4} />
+        <path d="M190 52 L222 64 V104 C222 126 207 140 190 148 C173 140 158 126 158 104 V64 Z" className="f-card s-ink" />
+        <path d="M177 99 l9 9 l17 -19" fill="none" className="s-hi" strokeWidth={2.6} strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M228 100 H278" className="s-mid" strokeWidth={1.4} />
+        <path d="M273 95 L279 100 L273 105" fill="none" className="s-mid" strokeWidth={1.4} />
+        {[["PARSE", 58], ["OCR", 88], ["TABLES", 118]].map(([t, y]) => (
+          <g key={t as string}>
+            <rect x="284" y={y as number} width="56" height="22" rx="4" className="f-card s-ink" />
+            <text x="312" y={(y as number) + 14} textAnchor="middle" fontSize="8" {...mono}>{t}</text>
+          </g>
+        ))}
+        <path d="M346 100 H394" className="s-mid" strokeWidth={1.4} />
+        <path d="M389 95 L395 100 L389 105" fill="none" className="s-mid" strokeWidth={1.4} />
+        {[0, 1, 2, 3].flatMap((r) =>
+          [0, 1, 2, 3].map((c) => (
+            <rect
+              key={`${r}-${c}`}
+              x={400 + c * 16}
+              y={66 + r * 16}
+              width="11"
+              height="11"
+              rx="2"
+              className={(r === 1 && c === 2) || (r === 2 && c === 0) || (r === 3 && c === 3) ? "f-hi" : "f-mid"}
+            />
+          ))
+        )}
+        <path d="M470 100 H498" className="s-mid" strokeWidth={1.4} />
+        <path d="M493 95 L499 100 L493 105" fill="none" className="s-mid" strokeWidth={1.4} />
+        {[522, 560, 598].map((cx, i) => (
+          <g key={cx}>
+            <rect x={cx - 16} y="70" width="32" height="60" rx="5" className={i === 1 ? "f-hi" : "f-card s-ink"} />
+            <ellipse cx={cx} cy="70" rx="16" ry="6" className={i === 1 ? "f-hi s-onhi" : "f-card s-ink"} />
+          </g>
+        ))}
+        <text x="625" y="40" textAnchor="middle" fontSize="10" {...mono}>HYBRID SEARCH · ONNX RERANK</text>
+        <path d="M620 100 H644" className="s-hi" strokeWidth={1.6} />
+        <path d="M639 95 L645 100 L639 105" fill="none" className="s-hi" strokeWidth={1.6} />
+        <rect x="650" y="54" width="84" height="92" rx="6" className="f-card s-ink" />
+        {[68, 78, 88, 98, 108].map((y, i) => (
+          <rect key={y} x="662" y={y} width={[60, 52, 60, 44, 56][i]} height="4" rx="2" className="f-faint" />
+        ))}
+        <rect x="662" y="122" width="40" height="14" rx="7" className="f-hi" />
+        <text x="682" y="132" textAnchor="middle" fontSize="8" className="art-t art-t--onhi">p.12</text>
+        {[["UPLOAD", 72], ["SECURITY SCAN", 190], ["QUEUE WORKERS", 312], ["CHUNK · EMBED", 430], ["TENANT SHARDS", 560], ["CITED RESULT", 692]].map(([t, x]) => (
+          <text key={t as string} x={x as number} y="182" textAnchor="middle" fontSize="10" {...mono}>{t}</text>
+        ))}
+      </>
+    ),
+    // Phone-width version: the same pipeline in two rows.
+    compact: {
+      viewBox: "0 0 320 180",
+      body: (
+        <>
+          <rect x="16" y="24" width="34" height="44" rx="4" className="f-card s-mid" />
+          <rect x="22" y="20" width="34" height="44" rx="4" className="f-card s-mid" />
+          <rect x="28" y="16" width="34" height="44" rx="4" className="f-card s-ink" />
+          {[26, 33, 40].map((y, i) => (
+            <rect key={y} x="34" y={y} width={[22, 18, 22][i]} height="3" rx="1.5" className="f-faint" />
+          ))}
+          <text x="40" y="80" textAnchor="middle" fontSize="8" {...mono}>UPLOAD</text>
+          <path d="M70 40 H102" className="s-mid" strokeWidth={1.3} />
+          <path d="M97 36 L102 40 L97 44" fill="none" className="s-mid" strokeWidth={1.3} />
+          <path d="M130 16 L150 24 V46 C150 58 141 66 130 70 C119 66 110 58 110 46 V24 Z" className="f-card s-ink" />
+          <path d="M121 43 l6 6 l11 -12" fill="none" className="s-hi" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" />
+          <text x="130" y="80" textAnchor="middle" fontSize="8" {...mono}>SCAN</text>
+          <path d="M160 40 H192" className="s-mid" strokeWidth={1.3} />
+          <path d="M187 36 L192 40 L187 44" fill="none" className="s-mid" strokeWidth={1.3} />
+          {[["PARSE", 16], ["OCR", 34], ["TABLES", 52]].map(([t, y]) => (
+            <g key={t as string}>
+              <rect x="200" y={y as number} width="56" height="14" rx="3" className="f-card s-ink" />
+              <text x="228" y={(y as number) + 10} textAnchor="middle" fontSize="7" {...mono}>{t}</text>
+            </g>
+          ))}
+          <text x="228" y="80" textAnchor="middle" fontSize="8" {...mono}>WORKERS</text>
+          <path d="M228 86 V94 H42 V102" fill="none" className="s-mid" strokeWidth={1.3} />
+          <path d="M38 97 L42 102 L46 97" fill="none" className="s-mid" strokeWidth={1.3} />
+          {[0, 1, 2].flatMap((r) =>
+            [0, 1, 2].map((c) => (
+              <rect key={`${r}-${c}`} x={20 + c * 16} y={108 + r * 16} width="12" height="12" rx="2"
+                className={(r === 1 && c === 1) || (r === 0 && c === 2) ? "f-hi" : "f-mid"} />
+            ))
+          )}
+          <text x="42" y="172" textAnchor="middle" fontSize="8" {...mono}>CHUNKS</text>
+          <path d="M74 130 H104" className="s-mid" strokeWidth={1.3} />
+          <path d="M99 126 L104 130 L99 134" fill="none" className="s-mid" strokeWidth={1.3} />
+          {[124, 152, 180].map((cx, i) => (
+            <g key={cx}>
+              <rect x={cx - 11} y="112" width="22" height="38" rx="4" className={i === 1 ? "f-hi" : "f-card s-ink"} />
+              <ellipse cx={cx} cy="112" rx="11" ry="4" className={i === 1 ? "f-hi s-onhi" : "f-card s-ink"} />
+            </g>
+          ))}
+          <text x="152" y="172" textAnchor="middle" fontSize="8" {...mono}>SHARDS</text>
+          <text x="215" y="122" textAnchor="middle" fontSize="7" {...mono}>ONNX</text>
+          <path d="M198 130 H232" className="s-hi" strokeWidth={1.4} />
+          <path d="M227 126 L232 130 L227 134" fill="none" className="s-hi" strokeWidth={1.4} />
+          <rect x="238" y="106" width="66" height="52" rx="5" className="f-card s-ink" />
+          {[116, 123, 130].map((y, i) => (
+            <rect key={y} x="246" y={y} width={[48, 40, 46][i]} height="3" rx="1.5" className="f-faint" />
+          ))}
+          <rect x="246" y="138" width="30" height="12" rx="6" className="f-hi" />
+          <text x="261" y="147" textAnchor="middle" fontSize="7" className="art-t art-t--onhi">p.12</text>
+          <text x="271" y="172" textAnchor="middle" fontSize="8" {...mono}>CITED</text>
+        </>
+      ),
+    },
+  },
+
+  // R·04 — MLR: claims traced through quote verification to approved sources
   mlr: {
     label: "Claims in a promotional piece are traced through a verification step to approved sources; a claim with no match is flagged.",
     viewBox: "0 0 760 220",
@@ -100,7 +220,7 @@ const art: Record<string, Art> = {
     },
   },
 
-  // R·02 — e-signature gate on a workflow transition, over a hash-chained audit trail
+  // R·05 — Sciagen CMS: e-signature gate on a workflow transition, over a hash-chained audit trail
   cms: {
     label: "A document moves from draft to MLR review to approved; the approval transition requires an e-signature, and every action lands in a hash-chained audit trail.",
     viewBox: "0 0 320 150",
@@ -132,7 +252,7 @@ const art: Record<string, Art> = {
     ),
   },
 
-  // R·03 — six narrowing intent layers into the side-panel agent; the fine-tuned model layer is highlighted
+  // R·02 — six narrowing intent layers into the side-panel agent; the fine-tuned model layer is highlighted
   crm: {
     label: "A browser with a side panel; requests pass through six narrowing intent layers, one of them a fine-tuned ModernBERT classifier, into the assistant.",
     viewBox: "0 0 320 150",
@@ -159,26 +279,32 @@ const art: Record<string, Art> = {
     ),
   },
 
-  // R·04 — SOP page with an intact table, clauses mapped into a reference graph
-  doc: {
-    label: "An SOP page with an intact table; its clauses are linked into a graph of regulatory references.",
-    viewBox: "0 0 300 150",
+  // R·03 — GxP Docs AI: multi-hop evidence across linked records, then a cited verdict
+  gxp: {
+    label: "Multi-hop evidence retrieval: the chat follows references from a batch record to an SOP version to a training record, then gives a cited verdict.",
+    viewBox: "0 0 320 150",
     body: (
       <>
-        <rect x="18" y="16" width="112" height="118" rx="6" className="f-card s-ink" />
-        <rect x="30" y="28" width="60" height="6" rx="2" className="f-ink" />
-        <rect x="30" y="42" width="86" height="4" rx="2" className="f-faint" />
-        <rect x="30" y="52" width="78" height="4" rx="2" className="f-faint" />
-        <rect x="30" y="66" width="88" height="44" rx="2" fill="none" className="s-mid" />
-        <path d="M30 80 H118 M30 95 H118 M59 66 V110 M89 66 V110" className="s-mid" />
-        <rect x="30" y="118" width="70" height="4" rx="2" className="f-faint" />
-        <path d="M130 56 L 190 36 M130 88 L 196 88 M196 88 L 250 42 M196 88 L 262 112 M190 36 L 250 42 M196 88 L 200 132" className="s-mid" strokeWidth={1.2} />
-        <circle cx="190" cy="36" r="8" className="f-card s-ink" />
-        <circle cx="196" cy="88" r="11" className="f-hi" />
-        <circle cx="250" cy="42" r="7" className="f-card s-ink" />
-        <circle cx="262" cy="112" r="8" className="f-card s-ink" />
-        <circle cx="200" cy="132" r="5" className="f-ink" />
-        <text x="214" y="92" fontSize="9" {...mono}>PART 11</text>
+        <path d="M54 34 C 54 18, 266 18, 266 34" fill="none" className="s-mid" strokeWidth={1.2} strokeDasharray="3 3" />
+        <text x="160" y="12" textAnchor="middle" fontSize="8" {...mono}>FOLLOW-UP SEARCH</text>
+        {[["BATCH REC.", 14], ["SOP v3", 120], ["TRAINING", 226]].map(([t, x]) => (
+          <g key={t as string}>
+            <rect x={x as number} y="36" width="80" height="60" rx="6" className="f-card s-ink" />
+            <text x={(x as number) + 8} y="50" fontSize="8" {...mono}>{t}</text>
+            {[58, 66, 74].map((y, i) => (
+              <rect key={y} x={(x as number) + 8} y={y} width={[56, 48, 52][i]} height="4" rx="2" className="f-faint" />
+            ))}
+          </g>
+        ))}
+        <path d="M94 66 H118" className="s-hi" strokeWidth={1.6} />
+        <path d="M113 62 L118 66 L113 70" fill="none" className="s-hi" strokeWidth={1.6} />
+        <path d="M200 66 H224" className="s-hi" strokeWidth={1.6} />
+        <path d="M219 62 L224 66 L219 70" fill="none" className="s-hi" strokeWidth={1.6} />
+        <text x="107" y="110" textAnchor="middle" fontSize="7" {...mono}>HOP 1</text>
+        <text x="213" y="110" textAnchor="middle" fontSize="7" {...mono}>HOP 2</text>
+        <path d="M266 96 V112" className="s-hi" strokeWidth={1.4} />
+        <rect x="200" y="112" width="106" height="20" rx="10" className="f-hi" />
+        <text x="253" y="125" textAnchor="middle" fontSize="8" className="art-t art-t--onhi">CITED VERDICT</text>
       </>
     ),
   },

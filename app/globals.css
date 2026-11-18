@@ -343,6 +343,9 @@ h1, h2, h3, p { margin: 0; }
 .tile--feat .tile__spacer { display: none; }
 .tile__art svg, .drawer__art svg { display: block; width: 100%; height: 100%; }
 .tile__art svg.art-compact, .drawer__art svg.art-compact { display: none; }
+/* Small tiles get the compact drawing even on desktop: the wide one is too fine at that size. */
+.tile:not(.tile--feat) .tile__art svg.art-wide { display: none; }
+.tile:not(.tile--feat) .tile__art svg.art-compact { display: block; }
 .drawer__art { height: 210px; padding: 10px; border-radius: 18px; background: var(--art-bg); }
 .f-ink { fill: var(--art-ink); } .f-mid { fill: var(--art-mid); } .f-faint { fill: var(--art-faint); }
 .f-card { fill: var(--art-card); } .f-hi { fill: var(--art-hi); }
